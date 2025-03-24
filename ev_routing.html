@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta charset="UTF-8">
+  <title>EV Routing</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta charset="UTF-8">
+  <title>EV Search</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+  <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps.css">
+  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps-web.min.js"></script>
+  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/services/services-web.min.js"></script>
+  <script src="chargingAvailability.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps.css">
+  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps-web.min.js"></script>
+  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/services/services-web.min.js"></script>
+  <script src="calculateLongDistanceEVRoute.js"></script>
+  <script src="ev_model.js"></script>
+
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+      width: calc(100% - 20px);
+      max-width: 300px;
+    }
+
+    #summary {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+      max-height: 200px;
+      overflow-y: auto;
+      width: calc(100% - 20px);
+      max-width: 300px;
+    }
+
+    .btn {
+      background-color: rgb(0, 128, 255);
+      color: white;
+      width: 100%;
+      padding: 10px 8px 10px 8px;
+      border-radius: 8px;
+      font-family: 'Times New Roman', Times, serif;
+      text-transform: uppercase;
+      border-color: aliceblue;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: rgb(83, 120, 251);
+    }
+
+    .text {
+      width: 100%;
+      display: block;
+      margin-bottom: .75em;
+      padding: 2px 2px 2px 2px;
+    }
+
+    .loc {
+      display: block;
+      font-size: 1.1em;
+      font-weight: bolder;
+      color: lightslategray;
+    }
+
+    input {
+      caret-color: blue;
+      border-radius: 1.3rem;
+      border-style: outset;
+      border-width: .15em;
+    }
+
+    .home-button {
+      display: none; /* Hidden by default */
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #fff;
+      border-radius: 50%;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      z-index: 1000;
+    }
+
+    .home-button img {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .home-button {
+        display: block; /* Show on mobile devices */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map" class="map"></div>
+  <div id="controls">
+    <label for="location" class="loc">Starting Location:</label>
+    <input class="text" id="start" type="text" />
+    <br />
+    <label for="location" class="loc">Finish Location:</label>
+    <input class="text" id="finish" type="text" />
+    <br />
+    <input id="calculate" type="button" class="btn" value="Calculate Route" onclick="findStart()" />
+  </div>
+  <div id="summary"></div>
+  <!-- Floating Home Button -->
+  <a href="index.html" class="home-button">
+    <img src="images/logo11.jpg" alt="Home" />
+  </a>
+  <script src="ev_routing.js"></script>
+</body>
+
+</html>
