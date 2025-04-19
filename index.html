@@ -296,6 +296,19 @@
         }
     </style>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 992) { // Bootstrap's lg breakpoint
+                        navbarCollapse.classList.remove('show');
+                    }
+                });
+            });
+        });
+
         window.addEventListener('scroll', function() {
             if (window.scrollY > 50) {
                 document.querySelector('.navbar').classList.add('scrolled');
