@@ -743,8 +743,97 @@
                 }
 
                 .footer {
-                    padding-bottom: 100px; /* Space for bottom nav */
+                    display: none;
+                    padding: 0;
+                    margin: 0;
                 }
+
+                #about {
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                }
+
+                /* Only show footer when about section is displayed */
+                #about[style*="display: block"] ~ .footer {
+                    display: block;
+                    margin-top: 0;
+                    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                    padding-bottom: 80px; /* Space for mobile nav */
+                }
+
+                /* Update section display logic */
+                .section.active {
+                    display: block !important;
+                }
+
+                /* Mobile nav adjustments */
+                .mobile-nav {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                    background: var(--primary-color);
+                    padding: 8px 0;
+                    margin: 0;
+                    z-index: 9999;
+                    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+                }
+
+                /* Fix section spacing */
+                .section {
+                    padding: 0.5rem 0;
+                    margin: 0;
+                }
+
+                .hero-section {
+                    padding: 0.5rem 0;
+                    margin: 0;
+                    min-height: calc(100vh - 65px);
+                }
+
+                /* Fix margin spacing */
+                .mt-5, .my-5 {
+                    margin-top: 0 !important;
+                }
+
+                /* Adjust body padding */
+                body {
+                    padding-bottom: 65px !important;
+                    margin: 0;
+                }
+
+                /* Fix mobile section spacing */
+                .section {
+                    padding: 0.5rem 0;
+                    margin: 0;
+                    min-height: calc(100vh - 65px); /* Viewport height minus nav height */
+                }
+
+                .hero-section {
+                    padding: 0.5rem 0;
+                    margin: 0;
+                    min-height: calc(100vh - 65px);
+                    margin-bottom: 0 !important;
+                }
+
+                /* Reset body and section spacing */
+                body {
+                    padding-bottom: 65px !important;
+                    margin: 0;
+                    overflow-x: hidden;
+                }
+
+                section {
+                    margin-bottom: 0 !important;
+                }
+
+                /* Adjust footer spacing */
+                #about[style*="display: block"] ~ .footer {
+                    margin-top: 0;
+                    padding-bottom: 65px;
+                }
+
             }
 
             html, body {
@@ -782,6 +871,38 @@
                 text-align: center;
                 padding: 5px;
                 min-width: 0;
+            }
+
+            /* Hero section fixes */
+            .hero-section {
+                margin: 0 !important;
+                padding: 0 !important;
+                padding-top: 60px !important;  /* Only add padding for navbar */
+            }
+
+            /* General section fixes */
+            .section {
+                padding: 1rem 0 !important;
+                margin: 0 !important;
+            }
+
+            /* Override all Bootstrap margin utilities */
+            [class*="mt-"], 
+            [class*="my-"],
+            [class*="m-"] {
+                margin-top: 0 !important;
+            }
+
+            /* Fix container spacing */
+            .container {
+                padding: 10px;
+                margin: 0;
+            }
+
+            /* Footer adjustments */
+            .footer {
+                margin: 0;
+                padding: 1rem 0 65px 0;  /* Account for bottom nav */
             }
         }
 
@@ -1169,15 +1290,30 @@
             }
 
             function updateNavigation() {
+                // Desktop navigation
                 const loginBtn = document.querySelector('.nav-item.nav-link[href="login.html"]');
                 const logoutBtn = document.querySelector('.nav-item.nav-link.logout-btn');
                 
+                // Mobile navigation
+                const mobileLoginBtn = document.querySelector('.mobile-nav-item.login-btn');
+                const mobileLogoutBtn = document.querySelector('.mobile-nav-item.logout-btn');
+                
                 if (localStorage.getItem('isLoggedIn') === 'true') {
+                    // Desktop buttons
                     loginBtn.style.display = 'none';
                     logoutBtn.style.display = 'block';
+                    
+                    // Mobile buttons
+                    mobileLoginBtn.style.display = 'none';
+                    mobileLogoutBtn.style.display = 'flex';
                 } else {
+                    // Desktop buttons
                     loginBtn.style.display = 'block';
                     logoutBtn.style.display = 'none';
+                    
+                    // Mobile buttons
+                    mobileLoginBtn.style.display = 'flex';
+                    mobileLogoutBtn.style.display = 'none';
                 }
             }
 
@@ -1346,7 +1482,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section mt-5" id="hero-section">
+    <section class="hero-section mt-1" id="hero-section">
         <div class="container">
             <h1 class="text-center mb-5" style="color: var(--primary-color); font-weight: 600; font-size: 2.5rem;">Welcome to EV CharFinder</h1>
             <div class="row align-items-center">
