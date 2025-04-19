@@ -16,8 +16,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Add Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Add AOS library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <title>EV ChargFinder </title>
+    <title>EV CharFinder </title>
     <style>
         :root {
             --primary-color: #1e3c72;
@@ -114,7 +117,12 @@
         /* Hero Section */
         .hero-section {
             padding: 6rem 0 4rem;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, #4286f4 0%, #373B44 100%); /* Changed to blue-dark gradient */
+            color: white;
+        }
+
+        .hero-section h1 {
+            color: white !important; /* Force white color for better contrast */
         }
 
         .hero-section img {
@@ -284,6 +292,124 @@
             .footer {
                 padding: 2rem 0;
             }
+
+            /* Service Cards Animation for Mobile */
+            #services .col-lg-4[data-aos] {
+                transform: translateY(30px);
+                opacity: 0;
+                transition: all 0.5s ease !important;
+            }
+
+            #services .col-lg-4[data-aos].aos-animate {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            /* Reset horizontal slide animations on mobile */
+            #services [data-aos="slide-right"],
+            #services [data-aos="slide-left"] {
+                transform: translateY(30px);
+            }
+
+            #services [data-aos="slide-right"].aos-animate,
+            #services [data-aos="slide-left"].aos-animate {
+                transform: translateY(0);
+            }
+
+            /* Remove animations specifically for Services section on mobile */
+            #services [data-aos] {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+
+            #services .feature-card {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            #services [data-aos-delay] {
+                transition-delay: 0s !important;
+            }
+
+            /* Keep existing mobile animations for other sections */
+            [data-aos="slide-right"]:not(#services *),
+            [data-aos="slide-left"]:not(#services *) {
+                transition-duration: 600ms !important;
+            }
+
+            .navbar {
+                padding: 0.5rem 1rem;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1030;
+                height: 60px;
+            }
+
+            .navbar-collapse {
+                position: fixed;
+                top: 60px;  /* Height of navbar */
+                left: 0;
+                right: 0;
+                background: var(--primary-color);
+                padding: 1rem;
+                border-radius: 0 0 15px 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                max-height: calc(100vh - 60px);
+                overflow-y: auto;
+                z-index: 1029;
+            }
+
+            .navbar-nav {
+                padding: 0.5rem !important;
+                background: transparent;
+            }
+
+            .nav-item.nav-link {
+                padding: 0.8rem 1rem;
+                margin: 0.3rem 0;
+                border-radius: 8px;
+                background: rgba(255,255,255,0.05);
+            }
+
+            .hero-section {
+                margin-top: 0;
+                padding-top: 60px;  /* Match navbar height */
+            }
+
+            .navbar-brand img {
+                height: 40px;
+            }
+
+            .navbar-collapse {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                padding: 1rem;
+                border-radius: 0 0 15px 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                margin: 0;
+            }
+
+            .navbar-nav {
+                margin: 0 !important;
+                padding: 0.5rem !important;
+            }
+
+            .nav-item.nav-link {
+                padding: 0.8rem 1rem;
+                margin: 0.2rem 0;
+                border-radius: 8px;
+            }
+
+            .mt-5 {
+                margin-top: 0 !important;
+            }
         }
 
         img.rounded {
@@ -292,7 +418,216 @@
         }
 
         .bg-light {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+            background: none !important;
+        }
+
+        /* Section Background Colors */
+        .hero-section {
+            padding: 6rem 0 4rem;
+        }
+
+        #services {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        #stations {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+        }
+
+        #ports {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+
+        #about {
+            background: linear-gradient(135deg, #373B44 0%, #4286f4 100%); /* Changed to dark-blue gradient */
+            color: white;
+        }
+
+        /* Update section title for dark backgrounds */
+        #about .section-title {
+            color: white;
+        }
+
+        /* Update text color for better contrast */
+        #about p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Animation for sliding elements */
+        [data-aos="slide-right"] {
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+        
+        [data-aos="slide-left"] {
+            transform: translateX(100px);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+        
+        [data-aos="slide-right"].aos-animate,
+        [data-aos="slide-left"].aos-animate {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 4rem 0 2rem;
+                text-align: center;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem !important;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .navbar-nav {
+                background: rgba(30, 60, 114, 0.95);
+                padding: 1rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+            }
+
+            .nav-item.nav-link {
+                text-align: center;
+                margin: 5px 0;
+            }
+
+            [data-aos] {
+                transition-duration: 600ms !important;
+            }
+
+            [data-aos="slide-right"] {
+                transform: translateX(-50px);
+            }
+            
+            [data-aos="slide-left"] {
+                transform: translateX(50px);
+            }
+
+            .feature-card {
+                transform: translateY(20px);
+                opacity: 0;
+                transition: all 0.6s ease;
+            }
+
+            .feature-card.aos-animate {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .row {
+                margin: 0 10px;
+            }
+
+            .col-lg-6 {
+                margin-bottom: 2rem;
+            }
+
+            .col-lg-6 img {
+                margin-bottom: 1.5rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .footer-section h5:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-links a {
+                justify-content: center;
+            }
+
+            /* Mobile animations for services */
+            #services .col-lg-4 {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.5s ease;
+            }
+
+            #services .col-lg-4.aos-animate {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            [data-aos-delay] {
+                transition-delay: 0s !important;
+            }
+
+            .hero-content {
+                text-align: left;
+                padding: 1rem 0;
+            }
+
+            .hero-content .lead {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .features p {
+                margin-bottom: 0.8rem !important;
+            }
+
+            .charging-locations {
+                text-align: center;
+                margin-top: 2rem;
+            }
+
+            .charging-locations span {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* Additional Small Screen Adjustments */
+        @media (max-width: 576px) {
+            .hero-section h1 {
+                font-size: 1.75rem !important;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .feature-card {
+                margin: 0 10px 2rem;
+            }
+
+            .custom-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
     <script>
@@ -307,92 +642,151 @@
                     }
                 });
             });
-        });
 
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                document.querySelector('.navbar').classList.add('scrolled');
-            } else {
-                document.querySelector('.navbar').classList.remove('scrolled');
-            }
-        });
-
-        function checkLogin() {
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                return true;
-            } else {
-                Swal.fire({
-                    title: 'Access Denied!',
-                    text: 'Please login to access this feature',
-                    icon: 'warning',
-                    confirmButtonText: 'Go to Login',
-                    confirmButtonColor: '#3085d6'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = 'login.html';
-                    }
-                });
-                return false;
-            }
-        }
-
-        function handleLogout() {
-            Swal.fire({
-                title: 'Logging Out',
-                text: 'Thank you for using our service!',
-                icon: 'success',
-                timer: 2000,
-                showConfirmButton: false
-            }).then(() => {
-                localStorage.clear();
-                window.location.href = 'index.html';
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    document.querySelector('.navbar').classList.add('scrolled');
+                } else {
+                    document.querySelector('.navbar').classList.remove('scrolled');
+                }
             });
-        }
 
-        function showWelcomeBack() {
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                const username = localStorage.getItem('username');
+            function checkLogin() {
+                if (localStorage.getItem('isLoggedIn') === 'true') {
+                    return true;
+                } else {
+                    Swal.fire({
+                        title: 'Access Denied!',
+                        text: 'Please login to access this feature',
+                        icon: 'warning',
+                        confirmButtonText: 'Go to Login',
+                        confirmButtonColor: '#3085d6'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = 'login.html';
+                        }
+                    });
+                    return false;
+                }
+            }
+
+            function handleLogout() {
                 Swal.fire({
-                    title: 'Welcome Back!',
-                    text: username ? `Good to see you again, ${username}!` : 'Good to see you again!',
+                    title: 'Logging Out',
+                    text: 'Thank you for using our service!',
                     icon: 'success',
                     timer: 2000,
                     showConfirmButton: false
+                }).then(() => {
+                    localStorage.clear();
+                    window.location.href = 'index.html';
                 });
             }
-        }
 
-        function updateNavigation() {
-            const loginBtn = document.querySelector('.nav-item.nav-link[href="login.html"]');
-            const logoutBtn = document.querySelector('.nav-item.nav-link.logout-btn');
-            
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                loginBtn.style.display = 'none';
-                logoutBtn.style.display = 'block';
-            } else {
-                loginBtn.style.display = 'block';
-                logoutBtn.style.display = 'none';
-            }
-        }
-
-        window.onload = () => {
-            updateNavigation();
-            showWelcomeBack();
-        };
-
-        // Update active nav item based on scroll position
-        window.addEventListener('scroll', function() {
-            let scrollPosition = window.scrollY + 100;
-            document.querySelectorAll('section[id]').forEach(section => {
-                if (section.offsetTop <= scrollPosition && 
-                    section.offsetTop + section.offsetHeight > scrollPosition) {
-                    document.querySelectorAll('.nav-item.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href').substring(1) === section.getAttribute('id')) {
-                            link.classList.add('active');
-                        }
+            function showWelcomeBack() {
+                if (localStorage.getItem('isLoggedIn') === 'true') {
+                    const username = localStorage.getItem('username');
+                    Swal.fire({
+                        title: 'Welcome Back!',
+                        text: username ? `Good to see you again, ${username}!` : 'Good to see you again!',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
                     });
                 }
+            }
+
+            function updateNavigation() {
+                const loginBtn = document.querySelector('.nav-item.nav-link[href="login.html"]');
+                const logoutBtn = document.querySelector('.nav-item.nav-link.logout-btn');
+                
+                if (localStorage.getItem('isLoggedIn') === 'true') {
+                    loginBtn.style.display = 'none';
+                    logoutBtn.style.display = 'block';
+                } else {
+                    loginBtn.style.display = 'block';
+                    logoutBtn.style.display = 'none';
+                }
+            }
+
+            function showCreatorAlert() {
+                if (!localStorage.getItem('creatorAlertShown')) {
+                    Swal.fire({
+                        title: 'Welcome to EV CharFinder',
+                        html: 'Created by:<br><strong>Aman Maurya</strong> and <strong>Anantkumar Shrivastav</strong>',
+                        icon: 'info',
+                        confirmButtonText: 'Got it!',
+                        timer: 5000
+                    });
+                    localStorage.setItem('creatorAlertShown', 'true');
+                }
+            }
+
+            window.onload = () => {
+                updateNavigation();
+                showWelcomeBack();
+                showCreatorAlert(); // Add this line
+            };
+
+            // Update active nav item based on scroll position
+            window.addEventListener('scroll', function() {
+                let scrollPosition = window.scrollY + 100;
+                document.querySelectorAll('section[id]').forEach(section => {
+                    if (section.offsetTop <= scrollPosition && 
+                        section.offsetTop + section.offsetHeight > scrollPosition) {
+                        document.querySelectorAll('.nav-item.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === section.getAttribute('id')) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Initialize AOS
+            AOS.init({
+                offset: 100,
+                duration: 1000,
+                easing: 'ease-out-cubic',
+                mirror: true  // this will trigger animations on scroll up
+            });
+
+            // Refresh AOS on scroll direction change
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                let st = window.pageYOffset || document.documentElement.scrollTop;
+                if (st < lastScrollTop) {
+                    // Scrolling up
+                    AOS.refresh();
+                }
+                lastScrollTop = st <= 0 ? 0 : st;
+            }, false);
+
+            // Update AOS initialization with mobile-friendly settings
+            AOS.init({
+                offset: window.innerWidth < 768 ? 20 : 100,
+                duration: window.innerWidth < 768 ? 600 : 1000,
+                easing: 'ease-out-cubic',
+                mirror: true,
+                once: false,
+                disable: false, // Enable on mobile
+                startEvent: 'DOMContentLoaded'
+            });
+
+            // Initialize AOS with optimized settings
+            AOS.init({
+                offset: 50,
+                duration: 800,
+                easing: 'ease-out',
+                once: false,
+                mirror: true,
+                anchorPlacement: 'top-bottom'
+            });
+
+            // Refresh AOS when all content is loaded
+            window.addEventListener('load', () => {
+                AOS.refresh();
             });
         });
     </script>
@@ -427,15 +821,31 @@
     <!-- Hero Section -->
     <section class="hero-section mt-5">
         <div class="container">
-            <h1 class="text-center mb-5" style="color: var(--primary-color); font-weight: 600; font-size: 2.5rem;">Welcome to EV ChargFinder</h1>
+            <h1 class="text-center mb-5" style="color: var(--primary-color); font-weight: 600; font-size: 2.5rem;">Welcome to EV CharFinder</h1>
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="slide-right" data-aos-duration="1000">
                     <img src="images/bg.jpg" alt="EV Charging" class="img-fluid">
                 </div>
-                <div class="col-lg-6">
-                    <p>Electric vehicles can help us reduce carbon emissions and build a more sustainable future. But as drivers, EVs provide us far more than the ability to reduce our carbon footprint.</p>
-                    <p>Electric vehicles offer a superior driving experience; instant torque and smooth handling . And let’s be honest, the convenience to charge wherever you park is one you can get used to faster than your average charging session. Next to this, EVs require a lot less maintenance than conventional ICE vehicles.</p>
-                    <p>With an EV however, you can charge your vehicle pretty much everywhere: at home, at the office, at a restaurant, whilst doing your shopping, whilst parked on the street, or you can top-off your car’s battery at a (no-longer aptly named) gas station.</p>
+                <div class="col-lg-6" data-aos="slide-left" data-aos-duration="1000">
+                    <div class="hero-content">
+                        <p class="lead mb-4">Electric vehicles help reduce carbon emissions and build a sustainable future. As drivers, EVs offer much more than just environmental benefits.</p>
+                        
+                        <div class="features mb-4">
+                            <p class="mb-3"><i class="fas fa-bolt mr-2 text-white"></i>Superior driving experience with instant torque and smooth handling</p>
+                            <p class="mb-3"><i class="fas fa-tools mr-2 text-white"></i>Requires less maintenance than conventional ICE vehicles</p>
+                            <p class="mb-3"><i class="fas fa-charging-station mr-2 text-white"></i>Convenient charging options available everywhere</p>
+                        </div>
+
+                        <p class="charging-locations">
+                            Charge your EV at multiple locations:
+                            <span class="d-block mt-2">
+                                <i class="fas fa-home mr-2"></i>Home
+                                <i class="fas fa-building ml-3 mr-2"></i>Office
+                                <i class="fas fa-utensils ml-3 mr-2"></i>Restaurants
+                                <i class="fas fa-shopping-cart ml-3 mr-2"></i>Shopping Centers
+                            </span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -444,10 +854,10 @@
     <!-- Services Section -->
     <section id="services" class="section">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
+            <h2 class="section-title" data-aos="fade-up" data-aos-duration="800">Our Services</h2>
             <div class="row">
                 <!-- Search Stations Card -->
-                <div class="col-lg-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
                     <div class="feature-card text-center">
                         <img src="images/circle1.jpg" class="rounded-circle mb-4" style="width: 150px; height: 150px; object-fit: cover;">
                         <i class="fas fa-charging-station fa-3x mb-4 text-primary"></i>
@@ -457,7 +867,7 @@
                     </div>
                 </div>
                 <!-- Route Finding Card -->
-                <div class="col-lg-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
                     <div class="feature-card text-center">
                         <img src="images/route1.jpg" class="rounded-circle mb-4" style="width: 150px; height: 150px; object-fit: cover;">
                         <i class="fas fa-route fa-3x mb-4 text-primary"></i>
@@ -467,7 +877,7 @@
                     </div>
                 </div>
                 <!-- Traffic Detection Card -->
-                <div class="col-lg-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="500" data-aos-duration="800">
                     <div class="feature-card text-center">
                         <img src="images/circle3.jpg" class="rounded-circle mb-4" style="width: 150px; height: 150px; object-fit: cover;">
                         <i class="fas fa-traffic-light fa-3x mb-4 text-primary"></i>
@@ -480,32 +890,12 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section bg-light">
-        <div class="container">
-            <h2 class="section-title">About Us</h2>
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <img src="images/about.gif" alt="About" class="img-fluid rounded">
-                </div>
-                <div class="col-lg-6">
-                    <p>An EV charging station is a device that allows drivers to charge up their electric cars while they’re
-                    parked at home or work. The station has two main components: A power source and a connector. The
-                    power source converts electricity into DC current, which is then converted into AC current using
-                    inverters..</p>
-                    <p>You can search for the nearest charging station from our maps api page and can use it to get navigate
-                    it to the place.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Stations Section -->
     <section id="stations" class="section">
         <div class="container">
-            <h2 class="section-title">Our Stations</h2>
+            <h2 class="section-title" data-aos="fade-up">Our Stations</h2>
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="slide-right" data-aos-delay="100">
                     <p><b>1. Power :</b>
                         Low-carbon energy sources such as wind farms and photovoltaic (PV) systems turn energy from wind
                         or light into the electricity needed to meet the needs of commercial, industrial and
@@ -523,7 +913,7 @@
                         Charging at home is often the most convenient and cost effective way for private customers to
                         recharge their cars, as it is where most cars are parked overnight.</p>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="slide-left" data-aos-delay="300">
                     <img src="images/first.jpg" alt="Stations" class="img-fluid rounded">
                 </div>
             </div>
@@ -531,16 +921,39 @@
     </section>
 
     <!-- Ports Section -->
-    <section id="ports" class="section bg-light">
+    <section id="ports" class="section">
         <div class="container">
-            <h2 class="section-title">Available Charging Ports</h2>
+            <h2 class="section-title" data-aos="fade-up">Available Charging Ports</h2>
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="slide-right" data-aos-delay="100">
                     <img src="images/stations available.png" alt="Ports" class="img-fluid rounded">
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="slide-left" data-aos-delay="300">
                     <p>Level 1 chargers : They are easy to find and use, inexpensive, and reliable. For a single-family home, a Level 1 charger may meet drivers’ needs. Level 1 chargers charge at a rate of 4-5 miles per hour. They work best if a driver is able to plug in and let the vehicle charge overnight on a regular basis.</p>
                     <p>Since Level 1 chargers are of limited use for those who use their cars often or in apartment buildings, many consumers want a Level 2 charger, which can charge at a rate of 20-65 miles per hour. The plugs for Level 2 chargers are different from plugs for Level 1 chargers and require different cords and equipment than what comes with your new car.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">About Us</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="slide-right" data-aos-delay="100">
+                    <img src="images/about.gif" alt="About" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6" data-aos="slide-left" data-aos-delay="300">
+                    <p>An EV charging station is a device that allows drivers to charge up their electric cars while they're
+                    parked at home or work. The station has two main components: A power source and a connector. The
+                    power source converts electricity into DC current, which is then converted into AC current using
+                    inverters..</p>
+                    <p>You can search for the nearest charging station from our maps api page and can use it to get navigate
+                    it to the place.</p>
+                    <p class="mt-4"><strong>Project Creators:</strong><br>
+                    Aman Maurya<br>
+                    Anantkumar Shrivastav</p>
                 </div>
             </div>
         </div>
@@ -552,7 +965,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h5>About</h5>
-                    <p>EV ChargFinder helps you locate and navigate to the nearest charging stations for your electric vehicle.</p>
+                    <p>EV CharFinder helps you locate and navigate to the nearest charging stations for your electric vehicle.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -579,7 +992,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 EV ChargFinder. All rights reserved.</p>
+                <p>&copy; 2025 EV CharFinder. All rights reserved.</p>
+                <p class="mt-2">Created by Aman Maurya and Anantkumar Shrivastav</p>
             </div>
         </div>
     </footer>
