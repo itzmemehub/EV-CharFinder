@@ -607,6 +607,182 @@
                 text-align: left;
                 padding: 1rem;
             }
+
+            /* Mobile App Style Navigation */
+            .mobile-nav {
+                display: none;
+            }
+
+            @media (max-width: 768px) {
+                .navbar {
+                    display: none;  /* Hide top navbar on mobile */
+                }
+
+                .mobile-nav {
+                    display: flex;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                    background: var(--primary-color);
+                    padding: 10px 0;
+                    z-index: 9999;
+                }
+
+                .mobile-nav-items {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: 100%;
+                    max-width: 100%;
+                    margin: 0 auto;
+                }
+
+                .mobile-nav-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    color: rgba(255,255,255,0.7);
+                    text-decoration: none;
+                    padding: 5px;
+                    width: 25%;
+                }
+
+                .mobile-nav-item i {
+                    font-size: 20px;
+                    margin-bottom: 4px;
+                }
+
+                .mobile-nav-item span {
+                    font-size: 12px;
+                }
+
+                .mobile-nav-item.active {
+                    color: white;
+                }
+
+                body {
+                    padding-bottom: 70px;
+                }
+
+                .mobile-nav {
+                    display: flex;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                    background: var(--primary-color);
+                    padding: 0.5rem;
+                    z-index: 1030;
+                    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+                    overflow-x: hidden;
+                }
+
+                .mobile-nav-items {
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);  /* Changed to 5 columns */
+                    width: 100%;
+                    gap: 5px;
+                    padding: 0 10px;
+                }
+
+                .mobile-nav-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    color: rgba(255,255,255,0.8);
+                    text-decoration: none;
+                    padding: 8px 5px;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                }
+
+                .mobile-nav-item.active {
+                    color: white;
+                    background: rgba(255,255,255,0.1);
+                }
+
+                .mobile-nav-item i {
+                    font-size: 1.2rem;
+                    margin-bottom: 4px;
+                }
+
+                .mobile-nav-item span {
+                    font-size: 0.7rem;
+                    white-space: nowrap;
+                }
+
+                .mobile-nav-item.login-btn {
+                    color: #4CAF50;
+                }
+
+                .mobile-nav-item.logout-btn {
+                    color: #f44336;
+                }
+
+                body {
+                    padding-bottom: 65px !important;
+                }
+
+                /* Adjust main content for bottom nav */
+                section {
+                    padding-bottom: 80px !important; /* Space for bottom nav */
+                }
+
+                /* Hide all sections by default */
+                #stations, #services, #ports, #about {
+                    display: none;
+                }
+
+                /* Show active section */
+                .section.active {
+                    display: block !important;
+                }
+
+                .footer {
+                    padding-bottom: 100px; /* Space for bottom nav */
+                }
+            }
+
+            html, body {
+                max-width: 100%;
+                overflow-x: hidden;
+                position: relative;
+                margin: 0;
+                padding: 0;
+            }
+
+            .mobile-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                padding: 8px 0;
+                z-index: 9999;
+                overflow: hidden;
+                box-sizing: border-box;
+            }
+
+            .mobile-nav-items {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+
+            .mobile-nav-item {
+                flex: 1;
+                text-align: center;
+                padding: 5px;
+                min-width: 0;
+            }
         }
 
         img.rounded {
@@ -1084,6 +1260,31 @@
             window.addEventListener('load', () => {
                 AOS.refresh();
             });
+
+            // Add this to your existing script
+            function showSection(sectionId) {
+                // Hide all sections
+                document.querySelectorAll('section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show selected section
+                document.getElementById(sectionId).style.display = 'block';
+                
+                // Update active state in navigation
+                document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                event.currentTarget.classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+
+            // Show home section by default on mobile
+            if (window.innerWidth <= 768) {
+                showSection('hero-section');
+            }
         });
     </script>
 </head>
@@ -1114,8 +1315,38 @@
         </div>
     </nav>
 
+    <!-- Add mobile navigation after navbar -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-items">
+            <a href="#hero-section" class="mobile-nav-item active" onclick="showSection('hero-section')">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#services" class="mobile-nav-item" onclick="showSection('services')">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Services</span>
+            </a>
+            <a href="#stations" class="mobile-nav-item" onclick="showSection('stations')">
+                <i class="fas fa-charging-station"></i>
+                <span>Stations</span>
+            </a>
+            <a href="#about" class="mobile-nav-item" onclick="showSection('about')">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+            <a href="login.html" class="mobile-nav-item login-btn">
+                <i class="fas fa-user"></i>
+                <span>Login</span>
+            </a>
+            <a href="#" class="mobile-nav-item logout-btn" onclick="handleLogout()" style="display: none;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="hero-section mt-5">
+    <section class="hero-section mt-5" id="hero-section">
         <div class="container">
             <h1 class="text-center mb-5" style="color: var(--primary-color); font-weight: 600; font-size: 2.5rem;">Welcome to EV CharFinder</h1>
             <div class="row align-items-center">
@@ -1306,6 +1537,50 @@
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
 
+    <!-- Add this after all section elements and before footer -->
+    <script>
+        // Navigation handler
+        function showSection(sectionId) {
+            // Hide all sections first
+            document.querySelectorAll('section.section, section.hero-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+                
+                // Update nav buttons active state
+                document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('onclick').includes(sectionId)) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                // Scroll to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Initialize mobile view
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth <= 768) {
+                // Show home by default
+                showSection('hero-section');
+                
+                // Update nav buttons for sections
+                document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const sectionId = this.getAttribute('href').substring(1);
+                        showSection(sectionId);
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
