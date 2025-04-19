@@ -9,6 +9,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- Add SweetAlert2 CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 
     <title>EV ChargFinder </title>
     <style>
@@ -262,15 +265,45 @@
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 return true;
             } else {
-                alert('Please login to access this feature');
-                window.location.href = 'login.html';
+                Swal.fire({
+                    title: 'Access Denied!',
+                    text: 'Please login to access this feature',
+                    icon: 'warning',
+                    confirmButtonText: 'Go to Login',
+                    confirmButtonColor: '#3085d6'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'login.html';
+                    }
+                });
                 return false;
             }
         }
 
         function handleLogout() {
-            localStorage.clear(); // Clear all localStorage data
-            window.location.href = 'index.html'; // Redirect to home page
+            Swal.fire({
+                title: 'Logging Out',
+                text: 'Thank you for using our service!',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                localStorage.clear();
+                window.location.href = 'index.html';
+            });
+        }
+
+        function showWelcomeBack() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                const username = localStorage.getItem('username');
+                Swal.fire({
+                    title: 'Welcome Back!',
+                    text: username ? `Good to see you again, ${username}!` : 'Good to see you again!',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }
         }
 
         function updateNavigation() {
@@ -286,7 +319,10 @@
             }
         }
 
-        window.onload = updateNavigation;
+        window.onload = () => {
+            updateNavigation();
+            showWelcomeBack();
+        };
     </script>
 </head>
 
