@@ -9,9 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <!-- Add SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
-    
+
     <title>EV ChargFinder </title>
     <style>
         html {
@@ -259,45 +257,37 @@
         }
             
     </style>
-    <!-- Add SweetAlert2 JS before your script -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
-<!--    <script>
+    <script>
         function checkLogin() {
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 return true;
             } else {
-                Swal.fire({
-                    title: 'Access Denied!',
-                    text: 'Please login to access this feature',
-                    icon: 'warning',
-                    confirmButtonText: 'Go to Login',
-                    confirmButtonColor: '#3085d6',
-                    showCancelButton: true,
-                    cancelButtonColor: '#d33'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = 'login.html';
-                    }
-                });
+                alert('Please login to access this feature');
+                window.location.href = 'login.html';
                 return false;
             }
         }
 
         function handleLogout() {
-            localStorage.setItem('isLoggedIn', 'false'); // Set login status to false
-            window.location.href = 'login.html'; // Redirect to login page
+            localStorage.clear(); // Clear all localStorage data
+            window.location.href = 'index.html'; // Redirect to home page
         }
 
-        window.onload = () => {
+        function updateNavigation() {
+            const loginBtn = document.querySelector('.nav-item.nav-link[href="login.html"]');
+            const logoutBtn = document.querySelector('.nav-item.nav-link.logout-btn');
+            
             if (localStorage.getItem('isLoggedIn') === 'true') {
-                document.querySelector('.nav-item.nav-link[href="login.html"]').style.display = 'none';
-                document.querySelector('.nav-item.nav-link[href="#"]').style.display = 'block';
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'block';
             } else {
-                document.querySelector('.nav-item.nav-link[href="login.html"]').style.display = 'block';
-                document.querySelector('.nav-item.nav-link[href="#"]').style.display = 'none';
+                loginBtn.style.display = 'block';
+                logoutBtn.style.display = 'none';
             }
-        };
-    </script>  -->
+        }
+
+        window.onload = updateNavigation;
+    </script>
 </head>
 
 <body>
@@ -318,7 +308,7 @@
                     <a class="nav-item nav-link" href="#services">Services</a>
                     <a class="nav-item nav-link" href="#footer">Contact-us</a>
                     <a class="nav-item nav-link" href="login.html">Login</a>
-                    <a class="nav-item nav-link" href="#" onclick="handleLogout()">Logout</a> <!-- Added Logout button -->
+                    <a class="nav-item nav-link logout-btn" href="#" onclick="handleLogout()" style="display: none;">Logout</a>
                 </div>
             </div>
         </div>
