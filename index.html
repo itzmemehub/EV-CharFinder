@@ -12,255 +12,247 @@
     <!-- Add SweetAlert2 CSS and JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <!-- Add custom Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <title>EV ChargFinder </title>
     <style>
-        html {
-            font-family: Arial, Helvetica, sans-serif;
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-
-
-        .bg-image {
-            /* The image used */
-            margin-bottom: 5%;
-            width: 75%;
-            margin-left: 20%;
-            /* Center and scale the image nicely */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
         }
 
-        h2 {
-            margin-bottom: 5%;
-            margin-top: 5%;
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .container1 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .navbar.scrolled {
+            padding: 0.3rem 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        img {
-            max-width:100%;
-        }
-            .logo-circle {
-            width: 100px;  /* Adjust as needed */
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
+        .navbar-brand {
+            padding: 0;
         }
 
-        .mainimg{
-            max-width: 90%;
+        .navbar-brand img {
+            height: 60px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-
-        .footer {
-            background: #343a40;
-            padding: 30px 0px;
-            font-family: 'Play', sans-serif;
-            text-align: center;
-            margin-top:3%;
-            }
-
-        .footer .row {
-            width: 100%;
-            margin: 1% 0%;
-            padding: 0.6% 0%;
-            color: gray;
-            font-size: 0.8em;
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+            border-color: white;
         }
 
-        .footer .row a {
-            text-decoration: none;
-            color: gray;
-            transition: 0.5s;
+        .nav-item.nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            padding: 0.5rem 1.2rem;
+            margin: 0 0.2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border-radius: 8px;
+            margin: 0 5px;
         }
 
-        .footer .row a:hover {
-            color: #fff;
+        .nav-item.nav-link:hover,
+        .nav-item.nav-link.active {
+            color: white !important;
+            background: rgba(255,255,255,0.1);
         }
 
-        .footer .row ul {
-            width: 100%;
+        .nav-item.nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
         }
 
-        .footer .row ul li {
-            display: inline-block;
-            margin: 0px 30px;
-        }
-
-        .footer .row a i {
-            font-size: 2em;
-            margin: 0% 1%;
-        }
-        .image{
-            margin: 2em;
-        }
-
-        @media (max-width:720px) {
-            .footer {
-                text-align: left;
-                padding: 5%;
-            }
-
-            .footer .row ul li {
-                display: block;
-                margin: 10px 0px;
-                text-align: left;
-            }
-
-            .footer .row a i {
-                margin: 0% 3%;
-            }
-        }
-        .container2{
-            text-align: center;
-        }
-        .portsimg{
-            width: 100%;
-        }
-        .container1{
-            margin-top: 2em;
-        }
-
-        /*.image {
-    flex-basis:70%;
-    order: 2;
-  }*/
-        .text {
-            color: rgb(61, 59, 59);
-
-        }
-        @media screen and (max-width: 1200px){
-            .text{
-                font-size: 15px;
-            }
-            .image{
-                width: 80%;
-                padding: 4px 4px 4px 4px ;
-            }
-        }
-        @media screen and (max-width: 768px){
-            .bg-image{
-                width: 60%;
-            }
-            .text{
-                font-size: 10px;
-            }
-            .image{
-                width: 50%;
-                padding-bottom: 10px;
-            }
-            .container1{
-                display: flex;
-                flex-direction: column;
-            }
-        }
-        @media screen and (max-width: 480px){
-            .text{
-                font-size: 8px;
-            }
-            .image{
-                width: 30%;
-                padding-bottom: 8px;
-            }
-            .container1{
-                display: flex;
-                flex-direction: column;
-            }
-
-        }
-        .find{
-            border-radius: 60%; 
+        .nav-item.nav-link:hover::after,
+        .nav-item.nav-link.active::after {
             width: 70%;
         }
-        .navbar{
-            width: 100%;
-            padding-left: 5%;
-            padding-right:5%;
-            margin: 0; /* Remove auto margin */
-            display: flex;
-            align-items: center;
-            background-color: #6A98B9;
-             /* Fix the position of the navbar */
-            top: 0; /* Align it to the top */
-            z-index: 1000; /* Ensure it stays above other content */
-            left: 0; /* Align it to the left */
-            right: 0; /* Align it to the right */
-        }
-        .navbar .container {
-            width: 100%; /* Ensure the container spans the full width */
-             /* Remove any margin */
-        }
-        .logo{
-            width: 60px;
-            margin-top: 50px;
-            padding-left: 40px;
-            cursor:pointer;
-        }
-        nav{
-            flex:1;
-            padding-left: 60px;
-        }
-        
-        nav ul li{
-            display: inline;
-            list-style: none;
-            margin:0px 20px;
-        }
-        
-        nav ul li a{
-            font-style: inter;
-            text-decoration: none;
-            color: white;
-            align-items: flex-end;
-        }
-        
-        nav ul li a:hover{
-            color:F8BEB8 ;
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
         }
 
-            .content{
-            font-size: 16px;
-            width:60%;
-            height: 150px; 
-            float: right;
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: none;
         }
-            .aboutimg{
-            padding: 10px;
-            float: left; 
-            width: 80%;
-            padding-bottom: 8px;  
-            margin: 2em;  
+
+        .navbar-dark .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
-        .nav-item.nav-link {
-            border: 1px solid white; /* Add border to nav buttons */
-            border-radius: 5px;
-            padding: 5px 10px;
-            margin: 0 10px; /* Increase distance between buttons */
-            transition: border-color 0.3s, background-color 0.3s; /* Add transition */
+
+        /* Hero Section */
+        .hero-section {
+            padding: 6rem 0 4rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
-        .nav-item.nav-link:hover {
-            border-color: #F8BEB8; /* Change border color on hover */
-            background-color: #343a40; /* Add background color on hover */
+
+        .hero-section img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .btn-info {
-            border: 1px solid #17a2b8; /* Add border to other buttons */
-            border-radius: 5px;
-            transition: border-color 0.3s, background-color 0.3s; /* Add transition */
+
+        /* Section Styling */
+        .section {
+            padding: 6rem 0;
         }
-        .btn-info:hover {
-            border-color: #138496; /* Change border color on hover */
-            background-color: #117a8b; /* Add background color on hover */
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            position: relative;
+            padding-bottom: 1rem;
+            color: var(--primary-color);
+            text-align: center;
+            font-weight: 600;
         }
-            
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Card Styling */
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Button Styling */
+        .custom-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 2.5rem;
+            border-radius: 30px;
+            border: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(30,60,114,0.2);
+        }
+
+        .custom-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30,60,114,0.3);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1e3c72 0%, #1e3c72 100%);
+            padding: 4rem 0;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer ul li {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .footer ul li a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            display: block;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .footer ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .footer ul li {
+                margin-bottom: 0.5rem;
+            }
+
+            .footer {
+                padding: 2rem 0;
+            }
+        }
+
+        .footer ul li a:hover {
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        img.rounded {
+            border-radius: 20px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .bg-light {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+        }
     </style>
     <script>
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').classList.add('scrolled');
+            } else {
+                document.querySelector('.navbar').classList.remove('scrolled');
+            }
+        });
+
         function checkLogin() {
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 return true;
@@ -327,10 +319,11 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="http://127.0.0.1:8080/index.html" target="_blank">
-                <img src="images/logo.png" width="100" height="100" alt="Logo" class="logo-circle">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Logo" class="rounded-circle">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -338,71 +331,99 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav mx-auto">
-                    <a class="nav-item nav-link active" href="#about">About </a>
+                    <a class="nav-item nav-link active" href="#about">About</a>
                     <a class="nav-item nav-link" href="#stations">Stations</a>
-                    <a class="nav-item nav-link" href="#ports">AvailablePorts</a>
+                    <a class="nav-item nav-link" href="#ports">Available Ports</a>
                     <a class="nav-item nav-link" href="#services">Services</a>
-                    <a class="nav-item nav-link" href="#footer">Contact-us</a>
                     <a class="nav-item nav-link" href="login.html">Login</a>
-                    <a class="nav-item nav-link logout-btn" href="#" onclick="handleLogout()" style="display: none;">Logout</a>
+                    <a class="nav-item nav-link logout-btn custom-btn" href="#" onclick="handleLogout()" style="display: none;">Logout</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-
-
-    <br>
-    <div class="container1">
-        <div class="row no-gutters">
-            <div class="col-xl-6 col-sm-12 ">
-                <div class="bg-image">
-                   <img src="images/bg.jpg" class="mainimg" alt="">
+    <!-- Hero Section -->
+    <section class="hero-section mt-5">
+        <div class="container">
+            <h1 class="text-center mb-5" style="color: var(--primary-color); font-weight: 600; font-size: 2.5rem;">Welcome to EV ChargFinder</h1>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="images/bg.jpg" alt="EV Charging" class="img-fluid">
+                </div>
+                <div class="col-lg-6">
+                    <p>Electric vehicles can help us reduce carbon emissions and build a more sustainable future. But as drivers, EVs provide us far more than the ability to reduce our carbon footprint.</p>
+                    <p>Electric vehicles offer a superior driving experience; instant torque and smooth handling . And let’s be honest, the convenience to charge wherever you park is one you can get used to faster than your average charging session. Next to this, EVs require a lot less maintenance than conventional ICE vehicles.</p>
+                    <p>With an EV however, you can charge your vehicle pretty much everywhere: at home, at the office, at a restaurant, whilst doing your shopping, whilst parked on the street, or you can top-off your car’s battery at a (no-longer aptly named) gas station.</p>
                 </div>
             </div>
-            <div class="col-xl-4 col-sm-12">
-                <p>Electric vehicles can help us reduce carbon emissions and build a more sustainable future. But as drivers, EVs provide us far more than the ability to reduce our carbon footprint.</p>
-                <p>Electric vehicles offer a superior driving experience; instant torque and smooth handling . And let’s be honest, the convenience to charge wherever you park is one you can get used to faster than your average charging session. Next to this, EVs require a lot less maintenance than conventional ICE vehicles.</p>
-                <p>With an EV however, you can charge your vehicle pretty much everywhere: at home, at the office, at a restaurant, whilst doing your shopping, whilst parked on the street, or you can top-off your car’s battery at a (no-longer aptly named) gas station.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="row">
+                <!-- Search Stations Card -->
+                <div class="col-lg-4">
+                    <div class="feature-card text-center">
+                        <img src="images/circle1.jpg" class="rounded-circle mb-4" style="width: 150px; height: 150px; object-fit: cover;">
+                        <i class="fas fa-charging-station fa-3x mb-4 text-primary"></i>
+                        <h4>Search Stations</h4>
+                        <p>Find nearby charging stations and check available slots in real-time.</p>
+                        <a href="ev_search.html" class="custom-btn btn" onclick="return checkLogin()">Search Now</a>
+                    </div>
+                </div>
+                <!-- Route Finding Card -->
+                <div class="col-lg-4">
+                    <div class="feature-card text-center">
+                        <img src="images/route1.jpg" class="rounded-circle mb-4" style="width: 150px; height: 150px; object-fit: cover;">
+                        <i class="fas fa-route fa-3x mb-4 text-primary"></i>
+                        <h4>Finding Route</h4>
+                        <p>Search your destination path in the simplest way from your current location.</p>
+                        <a href="ev_routing.html" class="custom-btn btn" onclick="return checkLogin()">Find Route</a>
+                    </div>
+                </div>
+                <!-- Traffic Detection Card -->
+                <div class="col-lg-4">
+                    <div class="feature-card text-center">
+                        <img src="images/circle3.jpg" class="rounded-circle mb-4" style="width: 150px; height: 150px; object-fit: cover;">
+                        <i class="fas fa-traffic-light fa-3x mb-4 text-primary"></i>
+                        <h4>Traffic Detector</h4>
+                        <p>Get real-time traffic information on your route to the destination.</p>
+                        <a href="traffic.html" class="custom-btn btn" onclick="return checkLogin()">Detect Traffic</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    
+    </section>
 
-
-    <!-- about us -->
-    <div class="container">
-        <h2 class="container2" id="about">ABOUT US</h2>
-        <div class="container1">
-            <div class="image">
-                <img src="images/about.gif">
-            </div>
-            <div class="text">
-                <p>An EV charging station is a device that allows drivers to charge up their electric cars while they’re
+    <!-- About Section -->
+    <section id="about" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="images/about.gif" alt="About" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6">
+                    <p>An EV charging station is a device that allows drivers to charge up their electric cars while they’re
                     parked at home or work. The station has two main components: A power source and a connector. The
                     power source converts electricity into DC current, which is then converted into AC current using
                     inverters..</p>
-                <p>You can search for the nearest charging station from our maps api page and can use it to get navigate
+                    <p>You can search for the nearest charging station from our maps api page and can use it to get navigate
                     it to the place.</p>
+                </div>
             </div>
         </div>
-    </div>
-        <!-- our stations -->
+    </section>
+
+    <!-- Stations Section -->
+    <section id="stations" class="section">
         <div class="container">
-            <h2 class="container2" id="stations">OUR STATIONS</h2>
-            <div class="container1">
-                <div class="text">
+            <h2 class="section-title">Our Stations</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
                     <p><b>1. Power :</b>
                         Low-carbon energy sources such as wind farms and photovoltaic (PV) systems turn energy from wind
                         or light into the electricity needed to meet the needs of commercial, industrial and
@@ -420,87 +441,55 @@
                         Charging at home is often the most convenient and cost effective way for private customers to
                         recharge their cars, as it is where most cars are parked overnight.</p>
                 </div>
-                <div class="image">
-                    <img src="images/first.jpg">
-                </div>
-            </div>
-        </div>
-
-<!-- Ports available -->
-
-  <div class="container">
-    <h2 class="container2" id="ports">Available Charging Ports</h2>
-    <div class="container1">
-        <div class="image">
-            <img src="images\stations available.png">
-        </div>
-        <div class="text">
-            <p>Level 1 chargers : They are easy to find and use, inexpensive, and reliable. For a single-family home, a Level 1 charger may meet drivers’ needs. Level 1 chargers charge at a rate of 4-5 miles per hour. They work best if a driver is able to plug in and let the vehicle charge overnight on a regular basis.</p>
-            <p>Since Level 1 chargers are of limited use for those who use their cars often or in apartment buildings, many consumers want a Level 2 charger, which can charge at a rate of 20-65 miles per hour. The plugs for Level 2 chargers are different from plugs for Level 1 chargers and require different cords and equipment than what comes with your new car.</p>
-            
-        </div>
-    </div>
-  </div>
-
-            <!-- our services -->
-            <div class="container">
-                <div id="our_services">
-                    <div class="container marketing">
-                        <h2 class="container2" id="services">OUR SERVICES</h2>
-                        <!-- Three columns of text below the carousel -->
-                        <div class="row">
-                            <!-- /.col-lg-4 -->
-                            <div class="col-lg-4">
-                                <svg class="bd-placeholder-img rounded-circle" width="25" height="155"
-                                    xmlns="http://www.w3.org/2000/svg" src="logo.png" role="img"
-                                    aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice"
-                                    focusable="false"></svg><img src="images/circle1.jpg">
-                                <h4><strong>Search stations</strong></h4>
-                                <p class="text">You can now search nearby charging stations from your current locations and can also
-                                    see how many charging slots are available at that place.</p>
-                                <p><a class="btn btn-info" href="ev_search.html" onclick="return checkLogin()">Search Stations</a></p>
-                            </div><!-- /.col-lg-4 -->
-                            <div class="col-lg-4">
-                                <svg class="bd-placeholder-img rounded-circle" width="25" height="155"
-                                    xmlns="http://www.w3.org/2000/svg" src="logo.png" role="img"
-                                    aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice"
-                                    focusable="false"></svg><img class="find" src="images/route1.jpg">
-                                <h4><strong>Finding route</strong></h4>
-                                <p class="text">You can now search your destination path in the most simplest way from your current locations
-                                    .This feature enables you to find the route on your finger tips.</p>
-                                <p><a class="btn btn-info" href="ev_routing.html" onclick="return checkLogin()">Find Route</a></p>
-                            </div>
-                            <div class="col-lg-4">
-                                <svg class="bd-placeholder-img rounded-circle" width="25" height="100"
-                                    xmlns="http://www.w3.org/2000/svg" src="logo.png" role="img"
-                                    aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice"
-                                    focusable="false"></svg><img src="images/circle3.jpg">
-
-                                <h4><strong>Traffic detector</strong></h4>
-                                <p class="text">Get the taffic detection on your way to the destination.You can get information about the traffic status here.
-                                    Enjoy ride! Travel safe! 
-                                </p>
-                                <p><a class="btn btn-info" href="traffic.html" onclick="return checkLogin()">Detect Traffic</a></p>
-                            </div><!-- /.col-lg-4 -->
-                        </div><!-- /.row -->
-                    </div>
+                <div class="col-lg-6">
+                    <img src="images/first.jpg" alt="Stations" class="img-fluid rounded">
                 </div>
             </div>
+        </div>
+    </section>
 
-
-        <footer>
-            <div id="footer" class="footer" style="width:100% ;">
-                <div class="row">
-                    <ul>
-                        <li><a href="#about">About us</a></li>
-                        <li><a href="#services">Our Services</a></li>
-                        <li><a href="#stations">Our Stations</a></li>
-                        <li><a href="#ports">Charging Ports</a></li>
-                        <li><a href="#">Logo</a></li>
-                    </ul>
+    <!-- Ports Section -->
+    <section id="ports" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Available Charging Ports</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="images/stations available.png" alt="Ports" class="img-fluid rounded">
+                </div>
+                <div class="col-lg-6">
+                    <p>Level 1 chargers : They are easy to find and use, inexpensive, and reliable. For a single-family home, a Level 1 charger may meet drivers’ needs. Level 1 chargers charge at a rate of 4-5 miles per hour. They work best if a driver is able to plug in and let the vehicle charge overnight on a regular basis.</p>
+                    <p>Since Level 1 chargers are of limited use for those who use their cars often or in apartment buildings, many consumers want a Level 2 charger, which can charge at a rate of 20-65 miles per hour. The plugs for Level 2 chargers are different from plugs for Level 1 chargers and require different cords and equipment than what comes with your new car.</p>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div id="footer" class="container">
+            <div class="row">
+                <ul>
+                    <li><a href="#about">About us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#stations">Our Stations</a></li>
+                    <li><a href="#ports">Charging Ports</a></li>
+                    <li><a href="#">Logo</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 
 </body>
 
