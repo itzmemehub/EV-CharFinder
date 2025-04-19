@@ -1421,6 +1421,61 @@
             if (window.innerWidth <= 768) {
                 showSection('hero-section');
             }
+
+            // Fix mobile logout functionality
+            function handleLogoutMobile() {
+                Swal.fire({
+                    title: 'Logging Out',
+                    text: 'Thank you for using our service!',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    localStorage.clear();
+                    window.location.reload(); // Reload page after logout
+                });
+            }
+
+            // Update mobile nav logout button
+            const mobileLogoutBtn = document.querySelector('.mobile-nav-item.logout-btn');
+            if (mobileLogoutBtn) {
+                mobileLogoutBtn.onclick = handleLogoutMobile;
+            }
+
+            // Unified logout handler
+            function handleLogout(e) {
+                if (e) e.preventDefault();
+                
+                Swal.fire({
+                    title: 'Logging Out',
+                    text: 'Thank you for using our service!',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    localStorage.clear();
+                    window.location.href = 'index.html';
+                });
+            }
+
+            // Update all logout buttons
+            document.querySelectorAll('.logout-btn').forEach(btn => {
+                btn.onclick = handleLogout;
+            });
+
+            // Update navigation state
+            function updateNavigation() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                document.querySelectorAll('.login-btn').forEach(btn => {
+                    btn.style.display = isLoggedIn ? 'none' : 'flex';
+                });
+                document.querySelectorAll('.logout-btn').forEach(btn => {
+                    btn.style.display = isLoggedIn ? 'flex' : 'none';
+                });
+            }
+
+            // Initialize navigation state
+            updateNavigation();
         });
     </script>
 </head>
@@ -1474,7 +1529,7 @@
                 <i class="fas fa-user"></i>
                 <span>Login</span>
             </a>
-            <a href="#" class="mobile-nav-item logout-btn" onclick="handleLogout()" style="display: none;">
+            <a href="javascript:void(0)" class="mobile-nav-item logout-btn" style="display: none;">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Logout</span>
             </a>
