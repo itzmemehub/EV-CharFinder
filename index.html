@@ -1225,25 +1225,7 @@
         }
     </style>
     <script>
-        // Define the checkLogin function in the global scope
-        function checkLogin() {
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                return true;
-            } else {
-                Swal.fire({
-                    title: 'Access Denied!',
-                    text: 'Please login to access this feature',
-                    icon: 'warning',
-                    confirmButtonText: 'Go to Login',
-                    confirmButtonColor: '#3085d6'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = 'login.html';
-                    }
-                });
-                return false;
-            }
-        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
             const navbarCollapse = document.querySelector('.navbar-collapse');
